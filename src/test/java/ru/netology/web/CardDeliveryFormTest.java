@@ -1,6 +1,7 @@
 package ru.netology.web;
 
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
@@ -10,8 +11,7 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.opentelemetry.semconv.trace.attributes.SemanticAttributes.FaasDocumentOperationValues.INSERT;
 import static java.time.LocalDate.now;
-import static org.openqa.selenium.Keys.BACK_SPACE;
-import static org.openqa.selenium.Keys.LEFT_CONTROL;
+import static org.openqa.selenium.Keys.*;
 
 public class CardDeliveryFormTest {
 
@@ -20,7 +20,7 @@ public class CardDeliveryFormTest {
         open("http://localhost:9999");
         $("[data-test-id=city] input").setValue("Казань");
         $("[data-test-id=date] input").sendKeys(LEFT_CONTROL, INSERT, BACK_SPACE);
-        $("[data-test-id=date] input").setValue((now().plusDays( 3).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+        $("[data-test-id=date] input").setValue((now().plusDays( 4).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
         $("[data-test-id=name] input").setValue("Александр");
         $("[data-test-id=phone] input").setValue("+79270000000");
         $("[data-test-id=agreement]").click();
