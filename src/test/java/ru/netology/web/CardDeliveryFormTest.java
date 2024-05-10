@@ -1,13 +1,11 @@
 package ru.netology.web;
 
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.opentelemetry.semconv.trace.attributes.SemanticAttributes.FaasDocumentOperationValues.INSERT;
 import static java.time.LocalDate.now;
@@ -25,9 +23,8 @@ public class CardDeliveryFormTest {
         $("[data-test-id=phone] input").setValue("+79270000000");
         $("[data-test-id=agreement]").click();
         $(".button").click();
-        $(withText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
-
+        $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(15));
+        $("[data-test-id=notification]").shouldHave(exactText("Успешно! Встреча успешно забронирована на " +
+                now().plusDays( 4).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
     }
-
-
 }
